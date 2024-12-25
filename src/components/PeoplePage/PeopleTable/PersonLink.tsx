@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import { Person } from '../../../types';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 type Props = {
   person: Person;
@@ -30,7 +30,7 @@ export const PersonLink: React.FC<Props> = props => {
     >
       <td>
         <Link
-          className={cn({ 'has-text-danger': sex === 'm' })}
+          className={cn({ 'has-text-danger': sex === 'f' })}
           to={`../${slug}`}
         >
           {name}
@@ -42,24 +42,6 @@ export const PersonLink: React.FC<Props> = props => {
       <td>{died}</td>
 
       <td>
-        {mother ? (
-          <NavLink to={`../${mother.slug}`} className="has-text-danger">
-            {mother.name}
-          </NavLink>
-        ) : (
-          motherName || '-'
-        )}
-      </td>
-
-      <td>
-        {father ? (
-          <NavLink to={`../${father.slug}`}>{fatherName}</NavLink>
-        ) : (
-          fatherName || '-'
-        )}
-      </td>
-
-      {/* <td>
         {mother ? (
           <Link className="has-text-danger" to={`../${mother.slug}`}>
             {mother.name}
@@ -75,7 +57,7 @@ export const PersonLink: React.FC<Props> = props => {
         ) : (
           fatherName || '-'
         )}
-      </td> */}
+      </td>
     </tr>
   );
 };
