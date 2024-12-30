@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../../../types';
-import { PersonLink } from './PersonLink';
+import { PersonRow } from './PersonRow';
 
 type Props = {
   people: Person[];
@@ -8,17 +8,6 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = props => {
   const { people } = props;
-
-  const peopleWithParents = people.map(person => {
-    const mother = people.find(m => person.motherName === m.name);
-    const father = people.find(f => person.fatherName === f.name);
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
 
   return (
     <table
@@ -37,8 +26,8 @@ export const PeopleTable: React.FC<Props> = props => {
       </thead>
 
       <tbody>
-        {peopleWithParents.map(person => (
-          <PersonLink key={person.slug} person={person} />
+        {people.map(person => (
+          <PersonRow key={person.slug} person={person} />
         ))}
       </tbody>
     </table>

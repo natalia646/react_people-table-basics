@@ -9,6 +9,17 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const peopleWithParents = people.map(person => {
+    const mother = people.find(m => person.motherName === m.name);
+    const father = people.find(f => person.fatherName === f.name);
+
+    return {
+      ...person,
+      mother,
+      father,
+    };
+  });
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -38,7 +49,7 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !isError && <PeopleTable people={people} />}
+          {!isLoading && !isError && <PeopleTable people={peopleWithParents} />}
         </div>
       </div>
     </>
